@@ -4,32 +4,28 @@ resource "random_integer" "this" {
 }
 
 resource "azurerm_cosmosdb_account" "this" {
-  name                = "${var.name}-${random_integer.this.result}"
-  location            = var.location
-  resource_group_name = var.resource_group_name
-  offer_type          = var.offer_type #"Standard"
-  kind                = var.kind       #"MongoDB"
-
-  automatic_failover_enabled = true
-
-  capabilities {
-    name = "EnableAggregationPipeline"
+  name                               = "${var.name}-${random_integer.this.result}"
+  location                           = var.location
+  resource_group_name                = var.resource_group_name
+  offer_type                         = var.offer_type
+  kind                               = var.kind
+  endpoint                           = var.endpoint
+  access_key_metadata_writes_enabled = var.enable_access_key_metadata_writes
+  automatic_failover_enabled         = var.enable_automatic_failover
+  backup {
+    interval_in_minutes = 240
+    retention_in_hours  = 8
+    storage_redundancy  = "Geo"
+    type                = "Periodic"
   }
 
-  capabilities {
-    name = "mongoEnableDocLevelTTL"
+  geo_location {
+    failover_priority = 0
+    location          = var.location
+    zone_redundant    = false
   }
-
-  capabilities {
-    name = "MongoDBv3.4"
-  }
-
-  capabilities {
-    name = "EnableMongo"
-  }
-
   consistency_policy {
-    consistency_level       = "BoundedStaleness"
+    consistency_level       = var.consistency_level
     max_interval_in_seconds = 300
     max_staleness_prefix    = 100000
   }
