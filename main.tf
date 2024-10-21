@@ -9,7 +9,6 @@ resource "azurerm_cosmosdb_account" "this" {
   resource_group_name                = var.resource_group_name
   offer_type                         = var.offer_type
   kind                               = var.kind
-  endpoint                           = var.endpoint
   access_key_metadata_writes_enabled = var.enable_access_key_metadata_writes
   automatic_failover_enabled         = var.enable_automatic_failover
   backup {
