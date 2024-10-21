@@ -10,7 +10,7 @@ variable "name" {
 
 variable "location" {
   type    = string
-  default = "UK South"
+  default = "uksouth"
 }
 
 variable "resource_group_name" {
@@ -31,11 +31,6 @@ variable "kind" {
 
 }
 
-variable "endpoint" {
-  type        = string
-  description = "The endpoint used to connect to the CosmosDB account."
-}
-
 variable "enable_access_key_metadata_writes" {
   type        = bool
   description = "Optional) Is write operations on metadata resources (databases, containers, throughput) via account keys enabled?"
@@ -52,4 +47,22 @@ variable "consistency_level" {
   type        = string
   description = "(Required) The Consistency Level to use for this CosmosDB Account"
   default     = "Session"
+}
+
+
+variable "capability" {
+  type        = string
+  description = "Configure capabilities to be enabled for this Cosmos DB account"
+  default     = null
+}
+
+variable "backup_interval" {
+  type    = number
+  default = 240
+
+}
+
+variable "backup_retention" {
+  type    = number
+  default = 8
 }

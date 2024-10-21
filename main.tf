@@ -12,8 +12,8 @@ resource "azurerm_cosmosdb_account" "this" {
   access_key_metadata_writes_enabled = var.enable_access_key_metadata_writes
   automatic_failover_enabled         = var.enable_automatic_failover
   backup {
-    interval_in_minutes = 240
-    retention_in_hours  = 8
+    interval_in_minutes = var.backup_interval
+    retention_in_hours  = var.backup_retention
     storage_redundancy  = "Geo"
     type                = "Periodic"
   }
@@ -32,5 +32,9 @@ resource "azurerm_cosmosdb_account" "this" {
   geo_location {
     location          = var.location
     failover_priority = 1
+  }
+
+  capabilities {
+    name = var.capability
   }
 }
