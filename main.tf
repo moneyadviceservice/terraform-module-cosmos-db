@@ -37,4 +37,8 @@ resource "azurerm_cosmosdb_account" "this" {
   capabilities {
     name = var.capability
   }
+
+  analytical_storage {
+    schema_type = var.analytical_storage_schema
+  }
 }

@@ -57,12 +57,19 @@ variable "capability" {
 }
 
 variable "backup_interval" {
-  type    = number
-  default = 240
-
+  type        = number
+  description = "The interval in minutes between two backups."
+  default     = 240
 }
 
 variable "backup_retention" {
-  type    = number
-  default = 8
+  type        = number
+  description = "The time in hours that each backup is retained."
+  default     = 8
+}
+
+variable "analytical_storage_schema" {
+  type        = string
+  description = "The schema type of the Analytical Storage for this Cosmos DB account."
+  default     = "WellDefined"
 }

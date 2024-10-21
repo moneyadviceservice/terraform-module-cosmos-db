@@ -28,8 +28,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_backup_interval"></a> [backup\_interval](#input\_backup\_interval) | n/a | `number` | `240` | no |
-| <a name="input_backup_retention"></a> [backup\_retention](#input\_backup\_retention) | n/a | `number` | `8` | no |
+| <a name="input_analytical_storage_schema"></a> [analytical\_storage\_schema](#input\_analytical\_storage\_schema) | The schema type of the Analytical Storage for this Cosmos DB account. | `string` | `"WellDefined"` | no |
+| <a name="input_backup_interval"></a> [backup\_interval](#input\_backup\_interval) | The interval in minutes between two backups. | `number` | `240` | no |
+| <a name="input_backup_retention"></a> [backup\_retention](#input\_backup\_retention) | The time in hours that each backup is retained. | `number` | `8` | no |
 | <a name="input_capability"></a> [capability](#input\_capability) | Configure capabilities to be enabled for this Cosmos DB account | `string` | `null` | no |
 | <a name="input_consistency_level"></a> [consistency\_level](#input\_consistency\_level) | (Required) The Consistency Level to use for this CosmosDB Account | `string` | `"Session"` | no |
 | <a name="input_enable_access_key_metadata_writes"></a> [enable\_access\_key\_metadata\_writes](#input\_enable\_access\_key\_metadata\_writes) | Optional) Is write operations on metadata resources (databases, containers, throughput) via account keys enabled? | `bool` | `true` | no |
