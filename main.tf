@@ -35,8 +35,12 @@ resource "azurerm_cosmosdb_account" "this" {
     failover_priority = 1
   }
 
-  capabilities {
-    name = var.capability
+  dynamic "capabilities" {
+    for_each = var.capability != null ? 1 : 0
+    content {
+      name = var.capability
+    }
+
   }
 
   analytical_storage {

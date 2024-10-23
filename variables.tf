@@ -15,7 +15,7 @@ variable "location" {
 
 variable "secondary_location" {
   type    = string
-  default = null
+  default = "ukwest"
 }
 
 variable "resource_group_name" {
