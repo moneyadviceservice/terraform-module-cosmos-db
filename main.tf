@@ -36,11 +36,10 @@ resource "azurerm_cosmosdb_account" "this" {
   }
 
   dynamic "capabilities" {
-    for_each = var.capability != null ? 1 : 0
+    for_each = var.capability != null ? [var.capability] : []
     content {
       name = var.capability
     }
-
   }
 
   analytical_storage {
