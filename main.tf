@@ -20,8 +20,8 @@ resource "azurerm_cosmosdb_account" "this" {
 
   consistency_policy {
     consistency_level       = var.consistency_level
-    max_interval_in_seconds = 300
-    max_staleness_prefix    = 100000
+    max_interval_in_seconds = var.consistency_level == "BoundedStaleness" ? 300 : null
+    max_staleness_prefix    = var.consistency_level == "BoundedStaleness" ? 100000 : null
   }
 
   geo_location {
