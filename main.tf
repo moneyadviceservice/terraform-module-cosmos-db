@@ -18,11 +18,6 @@ resource "azurerm_cosmosdb_account" "this" {
     type                = "Periodic"
   }
 
-  geo_location {
-    failover_priority = 0
-    location          = var.location
-    zone_redundant    = false
-  }
   consistency_policy {
     consistency_level       = var.consistency_level
     max_interval_in_seconds = 300
@@ -30,7 +25,13 @@ resource "azurerm_cosmosdb_account" "this" {
   }
 
   geo_location {
+    failover_priority = 0
     location          = var.location
+    zone_redundant    = false
+  }
+
+  geo_location {
+    location          = var.secondary_location
     failover_priority = 1
   }
 

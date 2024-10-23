@@ -13,6 +13,11 @@ variable "location" {
   default = "uksouth"
 }
 
+variable "secondary_location" {
+  type    = string
+  default = null
+}
+
 variable "resource_group_name" {
   type        = string
   description = "The resource group your function app will be assigned to"
