@@ -1,14 +1,15 @@
 resource "azurerm_cosmosdb_sql_container" "this" {
   for_each = {
     for db_key, db_value in var.databases :
-  db_key => db_value.containers }
-  name                  = each.value.container_name
-  resource_group_name   = var.resource_group_name
-  account_name          = azurerm_cosmosdb_account.this.name
-  database_name         = azurerm_cosmosdb_sql_database[each.key].name
-  partition_key_paths   = each.value.partition_key_paths
-  partition_key_version = 1
-  throughput            = each.value.throughput
+    db_key => db_value.containers
+  }
+
+  name                = each.value.container_name
+  resource_group_name = var.resource_group_name
+  account_name        = azurerm_cosmosdb_account.this.name
+  database_name       = azurerm_cosmosdb_sql_database[each.key].name
+  partition_key_paths = each.value.partition_key_paths
+  throughput          = each.value.throughput
 
   indexing_policy {
     indexing_mode = each.value.indexing_mode
