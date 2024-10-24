@@ -92,7 +92,7 @@ variable "containers" {
   type = map(object({
     container_name           = string
     db_name                  = string
-    partition_key_path       = string
+    partition_key_paths      = string
     partition_key_version    = number
     container_throughout     = number
     container_max_throughput = number
