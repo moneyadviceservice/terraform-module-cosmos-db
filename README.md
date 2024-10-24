@@ -35,23 +35,17 @@ No modules.
 | <a name="input_backup_retention"></a> [backup\_retention](#input\_backup\_retention) | The time in hours that each backup is retained. | `number` | `8` | no |
 | <a name="input_capability"></a> [capability](#input\_capability) | Configure capabilities to be enabled for this Cosmos DB account | `string` | `null` | no |
 | <a name="input_consistency_level"></a> [consistency\_level](#input\_consistency\_level) | (Required) The Consistency Level to use for this CosmosDB Account | `string` | `"Session"` | no |
-| <a name="input_container_name"></a> [container\_name](#input\_container\_name) | n/a | `string` | `"container1"` | no |
-| <a name="input_db_name"></a> [db\_name](#input\_db\_name) | n/a | `string` | `"db1"` | no |
+| <a name="input_containers"></a> [containers](#input\_containers) | List of Cosmos DB SQL Containers to create. Some parameters are inherited from cosmos account. | <pre>map(object({<br>    container_name           = string<br>    db_name                  = string<br>    partition_key_path       = string<br>    partition_key_version    = number<br>    container_throughout     = number<br>    container_max_throughput = number<br>    default_ttl              = number<br>    analytical_storage_ttl   = number<br>    indexing_policy_settings = object({<br>      sql_indexing_mode = string<br>      sql_included_path = string<br>      sql_excluded_path = string<br>      composite_indexes = map(object({<br>        indexes = set(object({<br>          path  = string<br>          order = string<br>        }))<br>      }))<br>      spatial_indexes = map(object({<br>        path = string<br>      }))<br>    })<br>    sql_unique_key = list(string)<br>    conflict_resolution_policy = object({<br>      mode      = string<br>      path      = string<br>      procedure = string<br>    })<br>  }))</pre> | `{}` | no |
+| <a name="input_databases"></a> [databases](#input\_databases) | Map of Cosmos DB SQL DBs to create. Some parameters are inherited from cosmos account. | <pre>map(object({<br>    db_name           = string<br>    db_throughput     = number<br>    db_max_throughput = number<br>  }))</pre> | `{}` | no |
 | <a name="input_enable_access_key_metadata_writes"></a> [enable\_access\_key\_metadata\_writes](#input\_enable\_access\_key\_metadata\_writes) | Optional) Is write operations on metadata resources (databases, containers, throughput) via account keys enabled? | `bool` | `true` | no |
 | <a name="input_enable_automatic_failover"></a> [enable\_automatic\_failover](#input\_enable\_automatic\_failover) | (Optional) Enable automatic failover for this Cosmos DB account. | `bool` | `false` | no |
 | <a name="input_env"></a> [env](#input\_env) | The environment to deploy to | `string` | n/a | yes |
-| <a name="input_excluded_path"></a> [excluded\_path](#input\_excluded\_path) | n/a | `list(string)` | n/a | yes |
-| <a name="input_included_path"></a> [included\_path](#input\_included\_path) | n/a | `list(string)` | n/a | yes |
-| <a name="input_indexing_mode"></a> [indexing\_mode](#input\_indexing\_mode) | n/a | `string` | `"consistent"` | no |
 | <a name="input_kind"></a> [kind](#input\_kind) | (Optional) Specifies the Kind of CosmosDB to create | `string` | `"GlobalDocumentDB"` | no |
 | <a name="input_location"></a> [location](#input\_location) | n/a | `string` | `"uksouth"` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of your function app | `string` | n/a | yes |
 | <a name="input_offer_type"></a> [offer\_type](#input\_offer\_type) | (Required) Specifies the Offer Type to use for this CosmosDB Account; currently, this can only be set to Standard. | `string` | `"Standard"` | no |
-| <a name="input_partition_key_paths"></a> [partition\_key\_paths](#input\_partition\_key\_paths) | n/a | `list(string)` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | The resource group your function app will be assigned to | `string` | n/a | yes |
 | <a name="input_secondary_location"></a> [secondary\_location](#input\_secondary\_location) | n/a | `string` | `"ukwest"` | no |
-| <a name="input_throughput"></a> [throughput](#input\_throughput) | n/a | `number` | `400` | no |
-| <a name="input_unique_key_paths"></a> [unique\_key\_paths](#input\_unique\_key\_paths) | n/a | `list(string)` | n/a | yes |
 
 ## Outputs
 
