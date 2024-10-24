@@ -78,41 +78,56 @@ variable "analytical_storage_schema" {
   default     = "WellDefined"
 }
 
-variable "db_name" {
-  type    = string
-  description = "The name of the Cosmos DB SQL Database"
-}
-variable "container_name" {
-  type    = string
-  default = "container1"
-}
+# variable "db_name" {
+#   type        = string
+#   description = "The name of the Cosmos DB SQL Database"
+# }
+# variable "container_name" {
+#   type    = string
+#   default = "container1"
+# }
 
-variable "throughput" {
-  type    = number
-  default = 400
-}
+# variable "throughput" {
+#   type    = number
+#   default = 400
+# }
 
-variable "partition_key_paths" {
-  type = list(string)
-  default = []
-}
+# variable "partition_key_paths" {
+#   type    = list(string)
+#   default = []
+# }
 
-variable "indexing_mode" {
-  type    = string
-  default = "consistent"
-}
+# variable "indexing_mode" {
+#   type    = string
+#   default = "consistent"
+# }
 
-variable "included_path" {
-  type = list(string)
-  default = []
-}
+# variable "included_path" {
+#   type    = list(string)
+#   default = []
+# }
 
-variable "excluded_path" {
-  type = list(string)
-  default = []
-}
+# variable "excluded_path" {
+#   type    = list(string)
+#   default = []
+# }
 
-variable "unique_key_paths" {
-  type = list(string)
-  default = []
+# variable "unique_key_paths" {
+#   type    = list(string)
+#   default = []
+# }
+
+variable "databases" {
+  type = map(object({
+    database_name = string
+    containers = map(object({
+      container_name      = string
+      partition_key_paths = list(string)
+      included_path       = list(string)
+      excluded_path       = list(string)
+      unique_key_paths    = list(string)
+      throughput          = number
+      indexing_mode       = string
+    }))
+  }))
 }
