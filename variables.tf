@@ -54,7 +54,6 @@ variable "consistency_level" {
   default     = "Session"
 }
 
-
 variable "capability" {
   type        = string
   description = "Configure capabilities to be enabled for this Cosmos DB account"
@@ -77,4 +76,43 @@ variable "analytical_storage_schema" {
   type        = string
   description = "The schema type of the Analytical Storage for this Cosmos DB account."
   default     = "WellDefined"
+}
+
+variable "db_name" {
+  type    = string
+  description = "The name of the Cosmos DB SQL Database"
+}
+variable "container_name" {
+  type    = string
+  default = "container1"
+}
+
+variable "throughput" {
+  type    = number
+  default = 400
+}
+
+variable "partition_key_paths" {
+  type = list(string)
+  default = []
+}
+
+variable "indexing_mode" {
+  type    = string
+  default = "consistent"
+}
+
+variable "included_path" {
+  type = list(string)
+  default = []
+}
+
+variable "excluded_path" {
+  type = list(string)
+  default = []
+}
+
+variable "unique_key_paths" {
+  type = list(string)
+  default = []
 }
