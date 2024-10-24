@@ -7,7 +7,7 @@ resource "azurerm_cosmosdb_sql_container" "this" {
   name                = each.value.container_name
   resource_group_name = var.resource_group_name
   account_name        = azurerm_cosmosdb_account.this.name
-  database_name       = azurerm_cosmosdb_sql_database[each.key].name
+  database_name       = azurerm_cosmosdb_sql_database[db_key].name # Correctly referencing database
   partition_key_paths = each.value.partition_key_paths
   throughput          = each.value.throughput
 
