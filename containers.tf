@@ -42,6 +42,16 @@ resource "azurerm_cosmosdb_sql_container" "this" {
       paths = each.value.unique_key
     }
   }
+  dynamic "conflict_resolution_policy" {
+    for_each = each.value.conflict_resolution_policy != null ? [1] : []
+    content {
+      mode                          = each.value.conflict_resolution_policy.mode
+      conflict_resolution_path      = each.value.conflict_resolution_policy.mode == "LastWriterWins" ? each.value.conflict_resolution_policy.path : null
+      conflict_resolution_procedure = each.value.conflict_resolution_policy.mode == "Custom" ? each.value.conflict_resolution_policy.procedure : null
+    }
+  }
+
+
 
   depends_on = [
     azurerm_cosmosdb_sql_database.this
