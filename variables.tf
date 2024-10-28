@@ -5,7 +5,7 @@ variable "env" {
 
 variable "name" {
   type        = string
-  description = "The name of your function app"
+  description = "The name of your Cosmos DB Account"
 }
 
 variable "location" {
@@ -20,7 +20,7 @@ variable "secondary_location" {
 
 variable "resource_group_name" {
   type        = string
-  description = "The resource group your function app will be assigned to"
+  description = "The resource group your Cosmos DB account will be assigned to"
 }
 
 variable "offer_type" {
@@ -84,7 +84,7 @@ variable "databases" {
     db_throughput     = number
     db_max_throughput = number
   }))
-  description = "Map of Cosmos DB SQL DBs to create. Some parameters are inherited from cosmos account."
+  description = "Map of Cosmos DB SQL DBs to create. Some parameters are inherited from the Cosmos account."
   default     = {}
 }
 
@@ -99,9 +99,9 @@ variable "containers" {
     default_ttl              = number
     analytical_storage_ttl   = number
     indexing_policy_settings = object({
-      sql_indexing_mode = string
-      sql_included_path = string
-      sql_excluded_path = string
+      indexing_mode = string
+      included_path = string
+      excluded_path = string
       composite_indexes = map(object({
         indexes = set(object({
           path  = string
@@ -112,13 +112,13 @@ variable "containers" {
         path = string
       }))
     })
-    sql_unique_key = list(string)
+    unique_key = list(string)
     conflict_resolution_policy = object({
       mode      = string
       path      = string
       procedure = string
     })
   }))
-  description = "List of Cosmos DB SQL Containers to create. Some parameters are inherited from cosmos account."
+  description = "List of Cosmos DB SQL Containers to create. Some parameters are inherited from the Cosmos account."
   default     = {}
 }

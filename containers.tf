@@ -20,26 +20,26 @@ resource "azurerm_cosmosdb_sql_container" "this" {
   dynamic "indexing_policy" {
     for_each = length(each.value.indexing_policy_settings) > 0 ? [1] : []
     content {
-      indexing_mode = each.value.indexing_policy_settings.sql_indexing_mode != null ? each.value.indexing_policy_settings.sql_indexing_mode : null
+      indexing_mode = each.value.indexing_policy_settings.indexing_mode != null ? each.value.indexing_policy_settings.indexing_mode : null
 
       dynamic "included_path" {
-        for_each = each.value.indexing_policy_settings.sql_included_path != null ? [1] : []
+        for_each = each.value.indexing_policy_settings.included_path != null ? [1] : []
         content {
-          path = each.value.indexing_policy_settings.sql_included_path
+          path = each.value.indexing_policy_settings.included_path
         }
       }
       dynamic "excluded_path" {
-        for_each = each.value.indexing_policy_settings.sql_excluded_path != null ? [1] : []
+        for_each = each.value.indexing_policy_settings.excluded_path != null ? [1] : []
         content {
-          path = each.value.indexing_policy_settings.sql_excluded_path
+          path = each.value.indexing_policy_settings.excluded_path
         }
       }
     }
   }
   dynamic "unique_key" {
-    for_each = length(each.value.sql_unique_key) > 0 ? each.value.sql_unique_key : []
+    for_each = length(each.value.unique_key) > 0 ? each.value.unique_key : []
     content {
-      paths = each.value.sql_unique_key
+      paths = each.value.unique_key
     }
   }
 
