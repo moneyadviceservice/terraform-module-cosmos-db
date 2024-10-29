@@ -1,10 +1,5 @@
-resource "random_integer" "this" {
-  min = 10000
-  max = 99999
-}
-
 resource "azurerm_cosmosdb_account" "this" {
-  name                               = "${var.name}-${random_integer.this.result}"
+  name                               = var.name
   location                           = var.location
   resource_group_name                = var.resource_group_name
   offer_type                         = var.offer_type
