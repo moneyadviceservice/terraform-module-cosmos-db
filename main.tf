@@ -6,6 +6,7 @@ resource "azurerm_cosmosdb_account" "this" {
   kind                               = var.kind
   access_key_metadata_writes_enabled = var.enable_access_key_metadata_writes
   automatic_failover_enabled         = var.enable_automatic_failover
+  is_virtual_network_filter_enabled  = var.virtual_network_filter_enabled
   backup {
     interval_in_minutes = var.backup_interval
     retention_in_hours  = var.backup_retention
@@ -30,6 +31,9 @@ resource "azurerm_cosmosdb_account" "this" {
     failover_priority = 1
   }
 
+  virtual_network_rule {
+    id = var.subnet_id
+  }
   dynamic "capabilities" {
     for_each = var.capability != null ? [var.capability] : []
     content {
