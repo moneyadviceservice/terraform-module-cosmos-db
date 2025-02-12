@@ -37,6 +37,7 @@ resource "azurerm_cosmosdb_account" "this" {
       id = var.subnet_id
     }
   }
+  
   dynamic "capabilities" {
     for_each = var.capability != null ? [var.capability] : []
     content {
