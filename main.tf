@@ -31,8 +31,11 @@ resource "azurerm_cosmosdb_account" "this" {
     failover_priority = 1
   }
 
-  virtual_network_rule {
-    id = var.subnet_id
+  dynamic "virtual_network_rule" {
+    for_each = var.subnet_id != null ? [1] : []
+    content {
+      id = var.subnet_id
+    }
   }
   dynamic "capabilities" {
     for_each = var.capability != null ? [var.capability] : []
