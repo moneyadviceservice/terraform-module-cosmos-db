@@ -15,7 +15,7 @@ variable "location" {
 
 variable "secondary_location" {
   type    = string
-  default = "ukwest"
+  default = null
 }
 
 variable "resource_group_name" {
@@ -121,4 +121,16 @@ variable "containers" {
   }))
   description = "List of Cosmos DB SQL Containers to create. Some parameters are inherited from the Cosmos account."
   default     = {}
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "The ID of the subnet to connect to"
+  default     = null
+}
+
+variable "virtual_network_filter_enabled" {
+  type        = bool
+  description = "Enables virtual network filtering for this Cosmos DB account."
+  default     = false
 }

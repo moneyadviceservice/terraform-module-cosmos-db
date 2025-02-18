@@ -6,6 +6,7 @@ resource "azurerm_cosmosdb_account" "this" {
   kind                               = var.kind
   access_key_metadata_writes_enabled = var.enable_access_key_metadata_writes
   automatic_failover_enabled         = var.enable_automatic_failover
+  is_virtual_network_filter_enabled  = var.virtual_network_filter_enabled
   backup {
     interval_in_minutes = var.backup_interval
     retention_in_hours  = var.backup_retention
@@ -25,9 +26,19 @@ resource "azurerm_cosmosdb_account" "this" {
     zone_redundant    = false
   }
 
-  geo_location {
-    location          = var.secondary_location
-    failover_priority = 1
+  dynamic "geo_location" {
+    for_each = var.secondary_location != null ? [1] : []
+    content {
+      location          = var.secondary_location
+      failover_priority = 1
+    }
+  }
+
+  dynamic "virtual_network_rule" {
+    for_each = var.subnet_id != null ? [1] : []
+    content {
+      id = var.subnet_id
+    }
   }
 
   dynamic "capabilities" {
