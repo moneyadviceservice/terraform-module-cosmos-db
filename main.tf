@@ -26,9 +26,12 @@ resource "azurerm_cosmosdb_account" "this" {
     zone_redundant    = false
   }
 
-  geo_location {
-    location          = var.secondary_location
-    failover_priority = 1
+  dynamic "geo_location" {
+    for_each = var.secondary_location != null ? [1] : []
+    content {
+      location          = var.secondary_location
+      failover_priority = 1
+    }
   }
 
   dynamic "virtual_network_rule" {
@@ -37,7 +40,7 @@ resource "azurerm_cosmosdb_account" "this" {
       id = var.subnet_id
     }
   }
-  
+
   dynamic "capabilities" {
     for_each = var.capability != null ? [var.capability] : []
     content {
